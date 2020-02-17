@@ -2,11 +2,17 @@
 
 namespace CL\Bundle\SlackBundle\Tests\DependencyInjection;
 
+use CL\Bundle\SlackBundle\DependencyInjection\CLSlackExtension;
 use CL\Bundle\SlackBundle\DependencyInjection\Configuration;
-use Matthias\SymfonyConfigTest\PhpUnit\AbstractConfigurationTestCase;
+use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
+use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use PHPUnit\Framework\TestCase;
 
-class ConfigurationTest extends AbstractConfigurationTestCase
+class ConfigurationTest extends TestCase
 {
+    use ConfigurationTestCaseTrait;
     /**
      * @test
      */
@@ -28,8 +34,16 @@ class ConfigurationTest extends AbstractConfigurationTestCase
     /**
      * {@inheritdoc}
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): ConfigurationInterface
     {
         return new Configuration();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getContainerExtension(): ExtensionInterface
+    {
+        return new CLSlackExtension();
     }
 }

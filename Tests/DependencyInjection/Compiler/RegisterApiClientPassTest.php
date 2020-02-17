@@ -7,6 +7,7 @@ use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\ContainerBuilderHasAliasConstraint;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use PHPUnit\Framework\Constraint\LogicalNot;
 
 class RegisterApiClientPassTest extends AbstractCompilerPassTestCase
 {
@@ -19,7 +20,7 @@ class RegisterApiClientPassTest extends AbstractCompilerPassTestCase
     /**
      * @inheritdoc
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -62,7 +63,7 @@ class RegisterApiClientPassTest extends AbstractCompilerPassTestCase
     /**
      * @inheritdoc
      */
-    protected function registerCompilerPass(ContainerBuilder $container)
+    protected function registerCompilerPass(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new RegisterApiClientPass());
     }
@@ -75,7 +76,7 @@ class RegisterApiClientPassTest extends AbstractCompilerPassTestCase
     {
         self::assertThat(
             $this->container,
-            new \PHPUnit_Framework_Constraint_Not(new ContainerBuilderHasAliasConstraint($aliasId, $expectedServiceId))
+            new LogicalNot(new ContainerBuilderHasAliasConstraint($aliasId, $expectedServiceId))
         );
     }
 }

@@ -5,8 +5,9 @@ namespace CL\Bundle\SlackBundle\Tests\DependencyInjection\Compiler;
 use CL\Bundle\SlackBundle\CLSlackBundle;
 use CL\Bundle\SlackBundle\DependencyInjection\Compiler\RegisterApiClientPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\TestCase;
 
-class BundleTest extends \PHPUnit_Framework_TestCase
+class BundleTest extends TestCase
 {
     /**
      * @test
